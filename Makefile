@@ -14,7 +14,7 @@ MAN_DIR ?= man
 
 DMENU_DEPS := $(addprefix $(BLD_DIR)/,dmenu.o drw.o util.o)
 STEST_DEPS := $(BLD_DIR)/stest.o
-PC_DEPS    := xinerama fontconfig x11 xft freetype2
+PC_DEPS    := xinerama fontconfig x11 xft freetype2 xrender
 
 		 CFLAGS ?= -Werror -Os
 override CFLAGS += -std=c99 -Wpedantic -Wall
