@@ -12,7 +12,7 @@ static       unsigned int border_width = 5;
 
 static       int topbar    = 0;
 static       int centered  = 1;
-static const int min_width = 500;
+static const int min_width = 700;
 
 static const float menu_height_ratio = 2.0f;
 
