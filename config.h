@@ -14,6 +14,8 @@ static       int topbar    = 0;
 static       int centered  = 1;
 static const int min_width = 700;
 
+static const char passwd_sym = '*';
+
 static const float menu_height_ratio = 2.0f;
 
 static const char *prompt = NULL;
