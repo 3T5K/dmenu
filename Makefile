@@ -77,10 +77,13 @@ get-config:
 clean-bld:
 	rm -rf $(BLD_DIR)
 
+clean-man:
+	rm -f $(MAN_DIR)/*.orig $(MAN_DIR)/*.rej
+
 clean-src:
 	rm -f $(TMPCFG) $(SRC_DIR)/*.orig $(SRC_DIR)/*.rej
 
-clean: clean-bld clean-src
+clean: clean-bld clean-man clean-src
 
 install-bins: all
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
