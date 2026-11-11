@@ -29,7 +29,7 @@
 #define OPAQUE                0xffu
 
 /* enums */
-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeCursor, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOut, SchemeCursor, SchemeCaret, SchemeLast }; /* color schemes */
 
 struct item {
 	char *text;
@@ -201,10 +201,10 @@ drawmenu(void)
 		char vi_char[] = {passwd ? passwd_sym : text[cursor], '\0'};
 		drw_text(drw, x + curpos, 0, TEXTW(vi_char) - lrpad, bh, 0, vi_char, 0);
 	} else if (using_vi_mode) {
-		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemeCaret]);
 		drw_rect(drw, x + curpos, 2, lrpad / 2, bh - 4, 1, 0);
 	} else if (curpos < w) {
-		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemeCaret]);
 		drw_rect(drw, x + curpos, 2, 2, bh - 4, 1, 0);
 	}
 
