@@ -5,12 +5,12 @@
  *   \__,_/_/ /_/ /_/\___/_/ /_/\__,_/  
  */
 
-static const unsigned int alpha        = 0x33;
+static const unsigned int alpha        = 0x77;
 static       unsigned int lines        = 10;
 static       unsigned int columns      = 3;
 static       unsigned int border_width = 5;
 static       unsigned int vi_mode      = 1;
-static const unsigned int start_mode   = 0; /* 0 -> insert, 1 -> normal */
+static const unsigned int start_mode   = 0;
 
 static       int topbar    = 0;
 static       int centered  = 1;
@@ -39,21 +39,60 @@ static const Key quit_keys[] =
     {  XK_q,    0         },
 };
 
+#ifndef DMENU_THEME
+#  define DMENU_THEME catppuccin
+#endif
+
+#if DMENU_THEME == catppuccin
+#  define COL_INACTIVE_FG      "#74c7ec"
+#  define COL_INACTIVE_BG      "#1e1e2e"
+#  define COL_INACTIVE_ALPHA     alpha
+#  define COL_ACTIVE_FG        "#8839ef"
+#  define COL_ACTIVE_BG        "#1e1e2e"
+#  define COL_ACTIVE_ALPHA       alpha
+#  define COL_MULTISEL_FG      "#0000ff"
+#  define COL_MULTISEL_BG      "#1e1e2e"
+#  define COL_MULTISEL_ALPHA     alpha
+#  define COL_VIM_CURSOR_BLOCK "#cdd6f4"
+#  define COL_VIM_CURSOR_TEXT  "#74c7ec"
+#  define COL_CURSOR           "#cdd6f4"
+#  define COL_BORDER           "#1e1e2e"
+#else
+#  error "bad theme"
+#endif
+
+#define COL_NIL "#000000"
+
 static const char *colors[SchemeLast][2] =
 {
     /*                  fg         bg       */
-    [SchemeNorm  ] = { "#bbbbbb", "#222222" },
-    [SchemeSel   ] = { "#eeeeee", "#005577" },
-    [SchemeOut   ] = { "#000000", "#00ffff" },
-    [SchemeCursor] = { "#222222", "#bbbbbb" },
-    [SchemeCaret ] = { "#eeeeee", "#222222" },
+    [SchemeNorm  ] = { COL_INACTIVE_FG
+                     , COL_INACTIVE_BG
+                     },
+    [SchemeSel   ] = { COL_ACTIVE_FG
+                     , COL_ACTIVE_BG
+                     },
+    [SchemeOut   ] = { COL_MULTISEL_FG
+                     , COL_MULTISEL_BG
+                     },
+	[SchemeBorder] = { COL_NIL
+                     , COL_BORDER
+                     },
+    [SchemeCursor] = { COL_VIM_CURSOR_TEXT
+                     , COL_VIM_CURSOR_BLOCK
+                     },
+    [SchemeCaret ] = { COL_CURSOR
+                     , COL_NIL
+                     },
 };
 
 static const unsigned int alphas[SchemeLast][2] =
 {
-    [SchemeNorm  ] = { OPAQUE, alpha  },
-    [SchemeSel   ] = { OPAQUE, OPAQUE },
-    [SchemeOut   ] = { OPAQUE, OPAQUE },
-    [SchemeCursor] = { OPAQUE, OPAQUE },
-    [SchemeCaret ] = { OPAQUE, OPAQUE },
+    [SchemeNorm  ] = { OPAQUE, COL_INACTIVE_ALPHA  },
+    [SchemeSel   ] = { OPAQUE, COL_ACTIVE_ALPHA    },
+    [SchemeOut   ] = { OPAQUE, COL_MULTISEL_ALPHA  },
+    [SchemeBorder] = { OPAQUE, OPAQUE              },
+    [SchemeCursor] = { OPAQUE, OPAQUE              },
+    [SchemeCaret ] = { OPAQUE, OPAQUE              },
 };
+
